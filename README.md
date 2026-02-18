@@ -1,0 +1,203 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/avp-protocol/spec/main/assets/avp-shield.svg" alt="AVP Shield" width="80" />
+</p>
+
+<h1 align="center">avp-py</h1>
+
+<p align="center">
+  <strong>Python implementation of Agent Vault Protocol</strong><br>
+  Standard conformance · Async support · Type hints
+</p>
+
+<p align="center">
+  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/v/avp?style=flat-square&color=00D4AA" alt="PyPI" /></a>
+  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/pyversions/avp?style=flat-square" alt="Python" /></a>
+  <a href="https://github.com/avp-protocol/avp-py/actions"><img src="https://img.shields.io/github/actions/workflow/status/avp-protocol/avp-py/ci.yml?style=flat-square" alt="CI" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square" alt="License" /></a>
+</p>
+
+---
+
+## Overview
+
+`avp-py` is the official Python implementation of the [Agent Vault Protocol (AVP)](https://github.com/avp-protocol/spec). It provides a simple, Pythonic interface for secure credential management in AI agent systems.
+
+## Features
+
+- **Standard AVP Conformance** — All 7 core operations
+- **Multiple Backends** — File, Keychain, Remote (Hardware via USB bridge)
+- **Async Support** — Both sync and async APIs
+- **Type Hints** — Full typing for IDE support
+- **Framework Integrations** — LangChain, CrewAI, AutoGen ready
+
+## Installation
+
+```bash
+pip install avp
+```
+
+With optional backends:
+
+```bash
+pip install avp[keychain]     # OS keychain support
+pip install avp[remote]       # Remote vault support (requests)
+pip install avp[all]          # All optional dependencies
+```
+
+## Quick Start
+
+```python
+import avp
+
+# Create vault instance
+vault = avp.Vault("avp.toml")
+
+# Authenticate
+vault.authenticate()
+
+# Store a secret
+vault.store("anthropic_api_key", "sk-ant-...")
+
+# Retrieve a secret
+api_key = vault.retrieve("anthropic_api_key")
+
+# Use with context manager (auto-cleanup)
+with avp.Vault("avp.toml") as vault:
+    api_key = vault.retrieve("anthropic_api_key")
+```
+
+## Async API
+
+```python
+import asyncio
+import avp
+
+async def main():
+    async with avp.AsyncVault("avp.toml") as vault:
+        await vault.authenticate()
+        api_key = await vault.retrieve("anthropic_api_key")
+        print(f"Retrieved key: {api_key[:10]}...")
+
+asyncio.run(main())
+```
+
+## Backend Selection
+
+```python
+import avp
+
+# File backend (encrypted)
+vault = avp.Vault(backend=avp.FileBackend(
+    path="~/.avp/secrets.enc",
+    cipher="chacha20-poly1305"
+))
+
+# OS Keychain
+vault = avp.Vault(backend=avp.KeychainBackend())
+
+# Remote vault
+vault = avp.Vault(backend=avp.RemoteBackend(
+    url="https://vault.company.com",
+    token="hvs.xxx"
+))
+```
+
+## Migration
+
+```python
+import avp
+
+# Migrate from file to keychain
+avp.migrate(
+    source=avp.FileBackend(path="~/.avp/secrets.enc"),
+    target=avp.KeychainBackend()
+)
+```
+
+## Framework Integration
+
+### LangChain
+
+```python
+from langchain_avp import AVPSecretManager
+
+# Use AVP as LangChain's secret manager
+secret_manager = AVPSecretManager("avp.toml")
+llm = ChatAnthropic(api_key=secret_manager.get("anthropic_api_key"))
+```
+
+### CrewAI
+
+```python
+from crewai_avp import AVPCredentialStore
+
+# Use AVP as CrewAI's credential store
+credentials = AVPCredentialStore("avp.toml")
+agent = Agent(credentials=credentials)
+```
+
+## Environment Variable Replacement
+
+Replace insecure `.env` files:
+
+```python
+import avp
+
+# Before: insecure .env file
+# ANTHROPIC_API_KEY=sk-ant-...
+
+# After: secure AVP vault
+vault = avp.Vault("avp.toml")
+os.environ["ANTHROPIC_API_KEY"] = vault.retrieve("anthropic_api_key")
+```
+
+Or use the AVP environment loader:
+
+```python
+import avp
+
+# Load all secrets into environment
+avp.load_env("avp.toml", [
+    "anthropic_api_key",
+    "openai_api_key",
+    "github_token"
+])
+```
+
+## API Reference
+
+### Vault
+
+| Method | Description |
+|--------|-------------|
+| `discover()` | Query vault capabilities |
+| `authenticate(**kwargs)` | Establish session |
+| `store(name, value, **kwargs)` | Store a secret |
+| `retrieve(name)` | Retrieve a secret |
+| `delete(name)` | Delete a secret |
+| `list(**filters)` | List secrets |
+| `rotate(name, strategy)` | Rotate a secret |
+
+## Conformance
+
+| Level | Status |
+|-------|--------|
+| AVP Core | ✅ Complete |
+| AVP Full | ✅ Complete |
+| AVP Hardware | ⚠️ Via USB bridge |
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup.
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE).
+
+---
+
+<p align="center">
+  <a href="https://github.com/avp-protocol/spec">Specification</a> ·
+  <a href="https://avp-protocol.github.io/avp-py">Documentation</a> ·
+  <a href="https://github.com/avp-protocol/avp-py/issues">Issues</a>
+</p>
