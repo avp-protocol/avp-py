@@ -1,13 +1,13 @@
 Metadata-Version: 2.4
-Name: avp
+Name: avp-sdk
 Version: 0.1.0
-Summary: Agent Vault Protocol - Python SDK
-Author: AVP Protocol Contributors
+Summary: Agent Vault Protocol - Secure credential management for AI agents
+Author-email: Omar Abdelmalek <abdelmalek.omar1@gmail.com>
 License: Apache-2.0
 Project-URL: Homepage, https://github.com/avp-protocol/avp-py
 Project-URL: Documentation, https://avp-protocol.github.io/website
 Project-URL: Repository, https://github.com/avp-protocol/avp-py
-Keywords: avp,vault,credentials,secrets,ai-agents
+Keywords: avp,vault,credentials,secrets,ai-agents,security,agent-vault-protocol
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: Apache Software License
@@ -16,8 +16,11 @@ Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
 Classifier: Programming Language :: Python :: 3.11
 Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
 Classifier: Topic :: Security
+Classifier: Topic :: Security :: Cryptography
 Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Typing :: Typed
 Requires-Python: >=3.9
 Description-Content-Type: text/markdown
 Requires-Dist: cryptography>=41.0.0
@@ -41,8 +44,8 @@ Requires-Dist: ruff>=0.1.0; extra == "dev"
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/v/avp?style=flat-square&color=00D4AA" alt="PyPI" /></a>
-  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/pyversions/avp?style=flat-square" alt="Python" /></a>
+  <a href="https://pypi.org/project/avp-sdk/"><img src="https://img.shields.io/pypi/v/avp-sdk?style=flat-square&color=00D4AA" alt="PyPI" /></a>
+  <a href="https://pypi.org/project/avp-sdk/"><img src="https://img.shields.io/pypi/pyversions/avp-sdk?style=flat-square" alt="Python" /></a>
   <a href="https://github.com/avp-protocol/avp-py/actions"><img src="https://img.shields.io/github/actions/workflow/status/avp-protocol/avp-py/ci.yml?style=flat-square" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square" alt="License" /></a>
 </p>
@@ -64,15 +67,15 @@ Requires-Dist: ruff>=0.1.0; extra == "dev"
 ## Installation
 
 ```bash
-pip install avp
+pip install avp-sdk
 ```
 
 With optional backends:
 
 ```bash
-pip install avp[keychain]     # OS keychain support
-pip install avp[remote]       # Remote vault support (requests)
-pip install avp[all]          # All optional dependencies
+pip install avp-sdk[keychain]     # OS keychain support
+pip install avp-sdk[remote]       # Remote vault support (requests)
+pip install avp-sdk[all]          # All optional dependencies
 ```
 
 ## Quick Start
