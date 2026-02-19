@@ -3,16 +3,16 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "avp"
+name = "avp-sdk"
 version = "0.1.0"
-description = "Agent Vault Protocol - Python SDK"
+description = "Agent Vault Protocol - Secure credential management for AI agents"
 readme = "README.md"
 license = {text = "Apache-2.0"}
 requires-python = ">=3.9"
 authors = [
-    {name = "AVP Protocol Contributors"}
+    {name = "Omar Abdelmalek", email = "abdelmalek.omar1@gmail.com"}
 ]
-keywords = ["avp", "vault", "credentials", "secrets", "ai-agents"]
+keywords = ["avp", "vault", "credentials", "secrets", "ai-agents", "security", "agent-vault-protocol"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -22,8 +22,11 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Security",
+    "Topic :: Security :: Cryptography",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 dependencies = [
     "cryptography>=41.0.0",

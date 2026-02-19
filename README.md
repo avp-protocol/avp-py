@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/v/avp?style=flat-square&color=00D4AA" alt="PyPI" /></a>
-  <a href="https://pypi.org/project/avp/"><img src="https://img.shields.io/pypi/pyversions/avp?style=flat-square" alt="Python" /></a>
+  <a href="https://pypi.org/project/avp-sdk/"><img src="https://img.shields.io/pypi/v/avp-sdk?style=flat-square&color=00D4AA" alt="PyPI" /></a>
+  <a href="https://pypi.org/project/avp-sdk/"><img src="https://img.shields.io/pypi/pyversions/avp-sdk?style=flat-square" alt="Python" /></a>
   <a href="https://github.com/avp-protocol/avp-py/actions"><img src="https://img.shields.io/github/actions/workflow/status/avp-protocol/avp-py/ci.yml?style=flat-square" alt="CI" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache_2.0-blue?style=flat-square" alt="License" /></a>
 </p>
@@ -33,15 +33,15 @@
 ## Installation
 
 ```bash
-pip install avp
+pip install avp-sdk
 ```
 
 With optional backends:
 
 ```bash
-pip install avp[keychain]     # OS keychain support
-pip install avp[remote]       # Remote vault support (requests)
-pip install avp[all]          # All optional dependencies
+pip install avp-sdk[keychain]     # OS keychain support
+pip install avp-sdk[remote]       # Remote vault support (requests)
+pip install avp-sdk[all]          # All optional dependencies
 ```
 
 ## Quick Start
